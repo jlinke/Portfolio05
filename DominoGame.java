@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 
 public class DominoGame {
@@ -71,9 +68,13 @@ public class DominoGame {
                 } else if (heapOfDominos.isEmpty() && userChoice == getPossibleSets(players.get(index)).size()) {
                     endDominoGame();
                 } else {
-                    Domino choosenDomino = players.get(index).getMyDominos().get(getPossibleSets(players.get(index)).contains(possibleSets[userChoice]));
-                    setDominos.add(choosenDomino);
-                    players.get(index).getMyDominos().remove(choosenDomino);
+                    Object i;
+                    for (Map.Entry<Integer, Domino> entry : getPlayers().get(index).getMyDominos().entrySet()) {
+                        if (entry.getValue().showValues().equals(possibleSets[userChoice])){
+                        setDominos.add(entry.getValue());
+                        players.get(index).getMyDominos().remove(entry);
+                        }
+                    }
                 }
             }
         }
@@ -170,13 +171,13 @@ public class DominoGame {
         } else if (isDominoFree(domino1) == 2) {
             UserDialog userDialog = new UserDialog();
             int userChoise = userDialog.getUserInput("An welche Seite ?", "rechts ", "links ");
-                if (userChoise == 0) {
-                    domino1.setRightDomino(domino2);
-                } else {
-                    domino1.setLeftDomino(domino2);
-                }
+            if (userChoise == 0) {
+                domino1.setRightDomino(domino2);
+            } else {
+                domino1.setLeftDomino(domino2);
             }
-
         }
+
     }
+}
 
