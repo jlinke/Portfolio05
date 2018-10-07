@@ -51,9 +51,12 @@ public class DominoGame {
     }
 
     private void roundCounter() {
-        for (int index = 0; index <= players.size(); index++) {
+        boolean isGameRunnig = true;
+        while (isGameRunnig)
+        /*for (int index = 0; index < players.size(); index++) */{
+            int index = 0;
             if (index == players.size() - 1) {
-                index = 0;
+                //index = 0;
             } else if (players.get(index).getMyDominos().size() == 0) {
                 endDominoGame();
             } else {
@@ -66,7 +69,7 @@ public class DominoGame {
                     players.get(index).drawDomino(heapOfDominos.getLast());
                     heapOfDominos.removeLast();
                 } else if (heapOfDominos.isEmpty() && userChoice == getPossibleSets(players.get(index)).size()) {
-                    endDominoGame();
+                    isGameRunnig = endDominoGame();
                 } else {
                     Object i;
                     for (Map.Entry<Integer, Domino> entry : getPlayers().get(index).getMyDominos().entrySet()) {
@@ -77,11 +80,12 @@ public class DominoGame {
                     }
                 }
             }
+            index++;
         }
     }
 
-    public void endDominoGame() {
-
+    public boolean endDominoGame() {
+        return false;
     }
 
     public void startDominoGame() {
